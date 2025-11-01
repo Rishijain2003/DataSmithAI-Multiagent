@@ -1,0 +1,13 @@
+{
+    "patient_name": "Amber Roman",
+    "discharge_date": "2025-08-01",
+    "primary_diagnosis": "Chronic Pyelonephritis",
+    "medications": [
+        "Amlodipine 5mg daily",
+        "Sodium Bicarbonate 500mg thrice daily"
+    ],
+    "dietary_restrictions": "Renal diet, avoid high-potassium fruits",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Swelling, shortness of breath, decreased urine output",
+    "discharge_instructions": "Stay hydrated within fluid limits, track your symptoms"
+}

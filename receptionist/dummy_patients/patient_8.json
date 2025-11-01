@@ -1,0 +1,13 @@
+{
+    "patient_name": "Jimmy Morales",
+    "discharge_date": "2025-05-05",
+    "primary_diagnosis": "Glomerulonephritis",
+    "medications": [
+        "Losartan 25mg daily",
+        "Hydrochlorothiazide 12.5mg daily"
+    ],
+    "dietary_restrictions": "Low potassium diet, protein restriction (0.8g/kg/day)",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Fever, chills, pain while urinating",
+    "discharge_instructions": "Avoid high-salt foods, keep track of urine output"
+}

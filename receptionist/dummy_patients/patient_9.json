@@ -1,0 +1,13 @@
+{
+    "patient_name": "Christine Hernandez",
+    "discharge_date": "2025-10-26",
+    "primary_diagnosis": "Diabetic Nephropathy",
+    "medications": [
+        "Amlodipine 5mg daily",
+        "Sodium Bicarbonate 500mg thrice daily"
+    ],
+    "dietary_restrictions": "Low potassium diet, protein restriction (0.8g/kg/day)",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Swelling, shortness of breath, decreased urine output",
+    "discharge_instructions": "Monitor blood pressure daily, weigh yourself daily"
+}

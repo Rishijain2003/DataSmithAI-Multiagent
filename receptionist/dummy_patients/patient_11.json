@@ -1,0 +1,13 @@
+{
+    "patient_name": "Michael Wilson",
+    "discharge_date": "2025-07-02",
+    "primary_diagnosis": "Polycystic Kidney Disease",
+    "medications": [
+        "Lisinopril 10mg daily",
+        "Furosemide 20mg twice daily"
+    ],
+    "dietary_restrictions": "Low salt, no processed food, fluid restriction (1.2L/day)",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Chest pain, dizziness, rapid weight gain",
+    "discharge_instructions": "Follow up regularly with nephrology clinic"
+}

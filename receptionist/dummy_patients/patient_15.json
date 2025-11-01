@@ -1,0 +1,13 @@
+{
+    "patient_name": "Donna Martin",
+    "discharge_date": "2025-07-31",
+    "primary_diagnosis": "Chronic Pyelonephritis",
+    "medications": [
+        "Metformin 500mg twice daily",
+        "Atorvastatin 10mg daily"
+    ],
+    "dietary_restrictions": "Low sodium (2g/day), fluid restriction (1.5L/day)",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Severe fatigue, itching, loss of appetite",
+    "discharge_instructions": "Monitor blood pressure daily, weigh yourself daily"
+}

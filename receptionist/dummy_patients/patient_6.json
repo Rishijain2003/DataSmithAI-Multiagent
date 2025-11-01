@@ -1,0 +1,13 @@
+{
+    "patient_name": "Cynthia Hansen",
+    "discharge_date": "2025-08-13",
+    "primary_diagnosis": "Renal Tubular Acidosis",
+    "medications": [
+        "Metformin 500mg twice daily",
+        "Atorvastatin 10mg daily"
+    ],
+    "dietary_restrictions": "Low potassium diet, protein restriction (0.8g/kg/day)",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Severe fatigue, itching, loss of appetite",
+    "discharge_instructions": "Follow up regularly with nephrology clinic"
+}

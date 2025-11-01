@@ -1,0 +1,13 @@
+{
+    "patient_name": "Stephanie Murray",
+    "discharge_date": "2025-09-05",
+    "primary_diagnosis": "Glomerulonephritis",
+    "medications": [
+        "Erythropoietin 4000 IU weekly",
+        "Calcium Carbonate 500mg twice daily"
+    ],
+    "dietary_restrictions": "Renal diet, avoid high-potassium fruits",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Swelling, shortness of breath, decreased urine output",
+    "discharge_instructions": "Stay hydrated within fluid limits, track your symptoms"
+}

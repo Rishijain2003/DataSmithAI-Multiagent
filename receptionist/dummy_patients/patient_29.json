@@ -1,0 +1,13 @@
+{
+    "patient_name": "Kenneth James",
+    "discharge_date": "2025-09-18",
+    "primary_diagnosis": "Nephrotic Syndrome",
+    "medications": [
+        "Metformin 500mg twice daily",
+        "Atorvastatin 10mg daily"
+    ],
+    "dietary_restrictions": "Renal diet, avoid high-potassium fruits",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Severe fatigue, itching, loss of appetite",
+    "discharge_instructions": "Follow up regularly with nephrology clinic"
+}

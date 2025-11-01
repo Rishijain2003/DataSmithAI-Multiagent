@@ -1,0 +1,13 @@
+{
+    "patient_name": "Bryan Coleman",
+    "discharge_date": "2025-09-03",
+    "primary_diagnosis": "Glomerulonephritis",
+    "medications": [
+        "Amlodipine 5mg daily",
+        "Sodium Bicarbonate 500mg thrice daily"
+    ],
+    "dietary_restrictions": "Renal diet, avoid high-potassium fruits",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Severe fatigue, itching, loss of appetite",
+    "discharge_instructions": "Avoid high-salt foods, keep track of urine output"
+}

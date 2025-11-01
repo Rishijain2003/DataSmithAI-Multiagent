@@ -1,0 +1,13 @@
+{
+    "patient_name": "Tammy Mccullough",
+    "discharge_date": "2025-06-29",
+    "primary_diagnosis": "Chronic Pyelonephritis",
+    "medications": [
+        "Losartan 25mg daily",
+        "Hydrochlorothiazide 12.5mg daily"
+    ],
+    "dietary_restrictions": "Low potassium diet, protein restriction (0.8g/kg/day)",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Fever, chills, pain while urinating",
+    "discharge_instructions": "Monitor blood pressure daily, weigh yourself daily"
+}

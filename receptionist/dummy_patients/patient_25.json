@@ -1,0 +1,13 @@
+{
+    "patient_name": "Susan Martin",
+    "discharge_date": "2025-05-13",
+    "primary_diagnosis": "Chronic Kidney Disease Stage 3",
+    "medications": [
+        "Lisinopril 10mg daily",
+        "Furosemide 20mg twice daily"
+    ],
+    "dietary_restrictions": "Low salt, no processed food, fluid restriction (1.2L/day)",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Persistent nausea, confusion, swelling in legs",
+    "discharge_instructions": "Take medications on time, report any swelling or dizziness"
+}

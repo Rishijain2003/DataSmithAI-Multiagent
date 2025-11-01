@@ -1,0 +1,13 @@
+{
+    "patient_name": "Kathy Michael",
+    "discharge_date": "2025-08-31",
+    "primary_diagnosis": "Diabetic Nephropathy",
+    "medications": [
+        "Erythropoietin 4000 IU weekly",
+        "Calcium Carbonate 500mg twice daily"
+    ],
+    "dietary_restrictions": "Low potassium diet, protein restriction (0.8g/kg/day)",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Swelling, shortness of breath, decreased urine output",
+    "discharge_instructions": "Stay hydrated within fluid limits, track your symptoms"
+}

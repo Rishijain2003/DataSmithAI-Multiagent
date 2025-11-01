@@ -1,0 +1,13 @@
+{
+    "patient_name": "Anthony Price",
+    "discharge_date": "2025-06-14",
+    "primary_diagnosis": "Glomerulonephritis",
+    "medications": [
+        "Erythropoietin 4000 IU weekly",
+        "Calcium Carbonate 500mg twice daily"
+    ],
+    "dietary_restrictions": "Renal diet, avoid high-potassium fruits",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Persistent nausea, confusion, swelling in legs",
+    "discharge_instructions": "Monitor blood pressure daily, weigh yourself daily"
+}

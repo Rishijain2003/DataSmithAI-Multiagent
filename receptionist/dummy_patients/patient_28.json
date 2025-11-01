@@ -1,0 +1,13 @@
+{
+    "patient_name": "Shannon Roy",
+    "discharge_date": "2025-08-01",
+    "primary_diagnosis": "Hypertensive Nephropathy",
+    "medications": [
+        "Lisinopril 10mg daily",
+        "Furosemide 20mg twice daily"
+    ],
+    "dietary_restrictions": "Renal diet, avoid high-potassium fruits",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Chest pain, dizziness, rapid weight gain",
+    "discharge_instructions": "Monitor blood pressure daily, weigh yourself daily"
+}

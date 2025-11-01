@@ -1,0 +1,23 @@
+# Environment
+python-dotenv>=1.0.1
+
+
+
+# LangChain ecosystem
+langchain-core>=0.2.11
+langchain-google-genai>=0.1.0
+langgraph>=0.2.0
+langchain-openai
+langchain_groq
+
+
+
+# (Optional) If you use OpenAI or other integrations in Configuration later
+# openai>=1.30.0
+
+# Utilities
+requests>=2.31.0
+tqdm>=4.66.2
+faker
+
+pandas

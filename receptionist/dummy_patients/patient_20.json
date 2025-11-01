@@ -1,0 +1,13 @@
+{
+    "patient_name": "Margaret House",
+    "discharge_date": "2025-06-07",
+    "primary_diagnosis": "Chronic Pyelonephritis",
+    "medications": [
+        "Amlodipine 5mg daily",
+        "Sodium Bicarbonate 500mg thrice daily"
+    ],
+    "dietary_restrictions": "Low salt, no processed food, fluid restriction (1.2L/day)",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Persistent nausea, confusion, swelling in legs",
+    "discharge_instructions": "Avoid high-salt foods, keep track of urine output"
+}

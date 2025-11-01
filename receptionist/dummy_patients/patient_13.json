@@ -1,0 +1,13 @@
+{
+    "patient_name": "Tracie Camacho",
+    "discharge_date": "2025-08-07",
+    "primary_diagnosis": "Renal Tubular Acidosis",
+    "medications": [
+        "Lisinopril 10mg daily",
+        "Furosemide 20mg twice daily"
+    ],
+    "dietary_restrictions": "Low potassium diet, protein restriction (0.8g/kg/day)",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Swelling, shortness of breath, decreased urine output",
+    "discharge_instructions": "Avoid high-salt foods, keep track of urine output"
+}

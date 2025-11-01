@@ -1,0 +1,13 @@
+{
+    "patient_name": "Catherine Roberts",
+    "discharge_date": "2025-10-03",
+    "primary_diagnosis": "End-Stage Renal Disease",
+    "medications": [
+        "Amlodipine 5mg daily",
+        "Sodium Bicarbonate 500mg thrice daily"
+    ],
+    "dietary_restrictions": "Low potassium diet, protein restriction (0.8g/kg/day)",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Chest pain, dizziness, rapid weight gain",
+    "discharge_instructions": "Take medications on time, report any swelling or dizziness"
+}

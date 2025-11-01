@@ -1,0 +1,13 @@
+{
+    "patient_name": "Teresa Potter",
+    "discharge_date": "2025-08-30",
+    "primary_diagnosis": "Hypertensive Nephropathy",
+    "medications": [
+        "Metformin 500mg twice daily",
+        "Atorvastatin 10mg daily"
+    ],
+    "dietary_restrictions": "Low sodium (2g/day), fluid restriction (1.5L/day)",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Persistent nausea, confusion, swelling in legs",
+    "discharge_instructions": "Monitor blood pressure daily, weigh yourself daily"
+}

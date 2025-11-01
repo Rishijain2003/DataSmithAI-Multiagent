@@ -1,0 +1,13 @@
+{
+    "patient_name": "Jacqueline Schwartz",
+    "discharge_date": "2025-06-20",
+    "primary_diagnosis": "Acute Kidney Injury",
+    "medications": [
+        "Lisinopril 10mg daily",
+        "Furosemide 20mg twice daily"
+    ],
+    "dietary_restrictions": "Low sodium (2g/day), fluid restriction (1.5L/day)",
+    "follow_up": "Nephrology clinic in 2 weeks",
+    "warning_signs": "Swelling, shortness of breath, decreased urine output",
+    "discharge_instructions": "Take medications on time, report any swelling or dizziness"
+}
