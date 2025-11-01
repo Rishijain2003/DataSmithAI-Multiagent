@@ -1,0 +1,85 @@
+# -----------------------------
+# Python
+# -----------------------------
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.so
+*.egg
+*.egg-info/
+.eggs/
+dist/
+build/
+develop-eggs/
+.installed.cfg
+
+# -----------------------------
+# Virtual Environment
+# -----------------------------
+datasmith-ai/
+.env/
+venv/
+.venv/
+
+# -----------------------------
+# IDE & Editor Files
+# -----------------------------
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# -----------------------------
+# OS Specific
+# -----------------------------
+.DS_Store
+Thumbs.db
+
+# -----------------------------
+# Logs and Outputs
+# -----------------------------
+logs/
+*.log
+*.out
+*.err
+
+# -----------------------------
+# Environment & Secrets
+# -----------------------------
+.env
+*.env
+secrets.json
+config.json
+
+# -----------------------------
+# Cache & Checkpoints
+# -----------------------------
+__cache__/
+.cache/
+.ipynb_checkpoints/
+*.checkpoint
+*.tmp
+
+# -----------------------------
+# Streamlit & Local Artifacts
+# -----------------------------
+.streamlit/
+*.db
+*.sqlite
+*.sqlite3
+
+# -----------------------------
+# Model & Embeddings
+# -----------------------------
+*.pkl
+*.bin
+*.pt
+*.npy
+*.npz
+*.h5
+vectorstore/
+chroma/
+chroma_db/
