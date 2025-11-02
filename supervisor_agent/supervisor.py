@@ -1,126 +1,144 @@
 import os
-import json
-from typing import Dict, Any, List
-from langgraph.graph import StateGraph, START, END, CompiledGraph
+from typing import Dict, Any, List, TypedDict, Optional
+from langgraph.graph import StateGraph, START, END
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 
-# --- BUILDER IMPORTS (Must match your file structure) ---
-# Assuming the file containing your builder classes is importable from the parent directory
-
-# 1. CLINICAL AGENT IMPORTS
-from clinical_agent.clinical_agent_builder import ClinicalAgentBuilder()
-clinical_agent_builder = ClinicalAgentBuilder()
-CLINICAL_GRAPH_COMPILED = clinical_agent_builder.build()
-
-# 2. RECEPTIONIST AGENT IMPORTS
+# --- BUILDER IMPORTS ---
 from receptionist.receptionist_agent_builder import ReceptionistAgentBuilder 
-receptionist_agent_builder = ReceptionistAgentBuilder()
-RECEPTIONIST_GRAPH_COMPILED = receptionist_agent_builder.build()
+from supervisor_agent.prompt import classification_prompt
+from supervisor_agent.schemas import SupervisorOutput
 
-# Define the nodes that will hold the compiled graphs
-RECEPTIONIST_NODE = RECEPTIONIST_GRAPH_COMPILED
-CLINICAL_NODE = CLINICAL_GRAPH_COMPILED
-   
-from prompt import classification_prompt 
-
-# --- CONFIGURATION ---
+# --- CONFIG ---
 load_dotenv() 
-model="gpt-4o-mini"
+SUPERVISOR_MODEL = "gpt-4o-mini"
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
 if not OPENAI_API_KEY:
     raise ValueError("OPENAI_API_KEY environment variable is required.")
 
-# Initialize LLM for Supervisor Classification
-llm_supervisor = ChatOpenAI(
-    model=model,
-    temperature=0.0,
-    openai_api_key=OPENAI_API_KEY
-)
+# ----------------------------------------------------
+# 1. STATE DEFINITION
+# ----------------------------------------------------
+
+class OverallSystemState(TypedDict):
+    input: str
+    history: List[Dict[str, str]]
+    route: str
+    agent: str
+    patient_name: Optional[str]
+    context: Dict[str, Any]
+    receptionist_data: Dict[str, Any]
+    clinical_data: Dict[str, Any]
+    output: str
+
+def create_initial_overall_state():
+    return OverallSystemState(
+        input="", 
+        output="", 
+        history=[], 
+        agent="", 
+        route="", 
+        patient_name="",
+        context={"patient_name": None}, 
+        receptionist_data={}, 
+        clinical_data={}
+    )
+
+# ----------------------------------------------------
+# 2. SUPERVISOR AGENT BUILDER
+# ----------------------------------------------------
+
+class SupervisorAgentBuilder:
+    def __init__(self):
+        print("🔧 Initializing SupervisorAgentBuilder...")
+
+        self.llm_supervisor = ChatOpenAI(
+            model=SUPERVISOR_MODEL,
+            temperature=0.0,
+            openai_api_key=OPENAI_API_KEY
+        )
+
+        print("✅ Supervisor LLM initialized:", SUPERVISOR_MODEL)
+
+        self.receptionist_builder = ReceptionistAgentBuilder()
+        self.RECEPTIONIST_NODE = self.receptionist_builder.build()
+
+        print("✅ Receptionist agent builder compiled successfully.\n")
+
+    def supervisor_agent_node(self, state: Dict[str, Any]) -> Dict[str, Any]:
+        print("\n🧠 [Supervisor Node Invoked]")
+        print("Incoming state:", state)
+
+        query = state["input"]
+        updated_history = state["history"] + [{"role": "user", "content": query}]
 
 
+        # --- Construct prompt ---
+        CLASSIFICATION_PROMPT = """
+        You are a routing supervisor. Your role is to determine the correct agent and attempt name extraction from the latest user query.
+        ...
+        LATEST Query to Analyze: {query}
+        """
 
-def OverallState():
-    # Includes standard LangGraph state variables and custom variables
-    return {"input": "", "output": "", "history": [], "agent": "", "patient_name": None}
+        history_str = "\n".join([f"{h['type'].capitalize()}: {h['content']}" for h in state["history"]])
+        formatted_prompt = CLASSIFICATION_PROMPT.format(messages=history_str, query=query)
 
+        structured_llm = self.llm_supervisor.with_structured_output(SupervisorOutput)
 
+        print("📤 Sending prompt to LLM for routing decision...\n")
+        result = structured_llm.invoke([HumanMessage(content=formatted_prompt)])
 
+        print("📥 Received structured result:", result)
 
+        route = result.route.strip().upper() if result.route else "RECEPTIONIST_AGENT"
+        patient_name = result.patient_name
 
-def supervisor_agent(state: Dict[str, Any]) -> str:
-    """
-    Uses an LLM to classify the query and returns the next agent's node name.
-    """
-    query = state["input"]
-    print(f"\n--- Supervisor received query: '{query}' ---")
+        print(f"🔀 Routing decision → {route}")
+        print(f"👤 Extracted patient_name → {patient_name}\n")
 
-    formatted_prompt = classification_prompt.format(query=query)
-    
-    try:
-        result = llm_supervisor.invoke([HumanMessage(content=formatted_prompt)])
-        decision = result.content.strip().upper()
-        
-        if decision not in ["CLINICAL_AGENT", "RECEPTIONIST_AGENT"]:
-            print(f"Classification failed: LLM returned '{decision}'. Defaulting to RECEPTIONIST_AGENT.")
-            route = "RECEPTIONIST_AGENT"
-        else:
-            route = decision
-            
-    except Exception as e:
-        print(f"ERROR: Supervisor LLM failed to invoke: {e}. Defaulting to RECEPTIONIST_AGENT.")
-        route = "RECEPTIONIST_AGENT"
+        # Return partial update
+        return {
+            "input": query,
+            "route": route,
+            "history": updated_history,
+            "patient_name": patient_name
+        }
 
-    print(f"Routing decision: → {route}")
-    
-    # The supervisor returns the string name of the next node
-    return route
+    def build(self):
+        print("\nBuilding Master Graph...")
+        graph = StateGraph(OverallSystemState)
 
+        graph.add_node("SUPERVISOR_ROUTER", self.supervisor_agent_node)
+        graph.add_node("RECEPTIONIST_AGENT", self.RECEPTIONIST_NODE)
 
+        graph.add_edge(START, "SUPERVISOR_ROUTER")
+        graph.add_edge("SUPERVISOR_ROUTER", "RECEPTIONIST_AGENT")
+        graph.add_edge("RECEPTIONIST_AGENT", END)
 
-
-workflow = StateGraph(OverallState)
-
-# 1. Add Nodes
-# The nodes now hold the fully compiled graphs (runnables)
-workflow.add_node("SUPERVISOR_ROUTER", supervisor_agent)
-workflow.add_node("RECEPTIONIST_AGENT", RECEPTIONIST_NODE)
-workflow.add_node("CLINICAL_AGENT", CLINICAL_NODE)
-
-# 2. Define Routing Edges
-workflow.add_edge(START, "SUPERVISOR_ROUTER")
-
-# The conditional edge uses the output string returned by supervisor_agent to route
-workflow.add_conditional_edges(
-    "SUPERVISOR_ROUTER",
-    lambda state: supervisor_agent(state), # Re-execute the supervisor logic to get the route key
-    {
-        "RECEPTIONIST_AGENT": "RECEPTIONIST_AGENT",
-        "CLINICAL_AGENT": "CLINICAL_AGENT",
-    }
-)
-
-# 3. Define End Edges (Agents complete the task and exit)
-workflow.add_edge("RECEPTIONIST_AGENT", END)
-workflow.add_edge("CLINICAL_AGENT", END)
-
-# Compile the graph
-app = workflow.compile()
+        compiled = graph.compile()
+        print("✅ Graph compiled successfully.\n")
+        return compiled
 
 
-if __name__ == "__main__":
-    # --- Test Case 1: Simple/Greeting Query ---
-    test_1 = {"input": "My name is John Smith. How are you today?", "patient_name": "John Smith", "history": []}
-    print("--- Running Test 1: Simple Greeting ---")
-    out_1 = app.invoke(test_1)
-    print(f"\nFINAL AGENT: {out_1.get('agent')}")
-    print(f"FINAL OUTPUT: {out_1.get('output')}")
+# # ----------------------------------------------------
+# # 3. TEST RUNNER (Run from terminal)
+# # ----------------------------------------------------
 
-    # --- Test Case 2: Clinical Query ---
-    test_2 = {"input": "I have swelling in my legs. Should I take more medicine?", "patient_name": "John Smith", "history": []}
-    print("\n--- Running Test 2: Clinical Question ---")
-    out_2 = app.invoke(test_2)
-    print(f"\nFINAL AGENT: {out_2.get('agent')}")
-    print(f"FINAL OUTPUT: {out_2.get('output')}")
+# if __name__ == "__main__":
+#     print("\n🚀 Starting test run of SupervisorAgentBuilder...\n")
+
+#     supervisor = SupervisorAgentBuilder()
+#     graph = supervisor.build()
+
+#     # Create initial state
+#     state = create_initial_overall_state()
+#     state["input"] = "Hello, my name is Barbara Owens. I’d like to book an appointment."
+
+#     print("\n▶️ Executing graph with initial query...\n")
+#     result = graph.invoke(state)
+
+#     print("\n================== FINAL OUTPUT ==================")
+#     print(result)
+#     print("==================================================\n")

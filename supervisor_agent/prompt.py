@@ -1,10 +1,20 @@
 classification_prompt = """
-You are a routing supervisor for a medical assistant system. Your task is to analyze the user's query and determine which agent should handle the response.
+You are a routing supervisor. Your role is to determine the correct agent and attempt name extraction from the latest user query.
 
-- **CLINICAL_AGENT**: If the query asks about symptoms, diagnosis, treatment, medications, specific recovery questions, or complex medical conditions (e.g., "Is my fever normal?", "What is Lisinopril?", "I have pain.").
-- **RECEPTIONIST_AGENT**: If the query is a greeting, name verification, general pleasantries, or simple follow-up questions about non-medical discharge logistics.
+**Routing Rules:**
+- **CLINICAL_AGENT**: If the LATEST query asks about symptoms, diagnosis, treatment, medications, specific recovery questions, or complex health questions.
+- **RECEPTIONIST_AGENT**: If the LATEST query is a greeting, general pleasantries, scheduling, or a request for general, non-clinical administrative information.
 
-Output only the name of the agent to handle the query: 'CLINICAL_AGENT' or 'RECEPTIONIST_AGENT'.
+**Extraction Rule:**
+Analyze the LATEST query only. If it contains a patient's full name (e.g., "My name is Jane Smith" or "John Doe), extract the name and return it in the 'patient_name' field. Otherwise, return None for that field.
+Try to Understand the query 
+--- Conversation History (Prior Context) ---
+{messages}
+------------------------------------------
 
-Query: {query}
-"""
+LATEST Query to Analyze: {query}
+
+Output your decision and extraction in the required JSON format.
+
+
+            """
